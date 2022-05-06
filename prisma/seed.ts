@@ -8,7 +8,9 @@ const targetDir = path.resolve(__dirname, 'seeds');
 const files = fs.readdirSync(targetDir).filter((f) => f.endsWith('.ts'));
 
 interface Seed {
-  default(prisma: PrismaClient): PrismaPromise<unknown[]>;
+  default(
+    prisma: PrismaClient,
+  ): PrismaPromise<unknown> | PrismaPromise<unknown>[];
 }
 
 async function main() {
