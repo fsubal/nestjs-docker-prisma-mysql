@@ -11,12 +11,12 @@ services:
       - .:/app
     depends_on:
       - mysql
-    environment:
-      - DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+    env_file:
+      - .env
 
   mysql:
-    image: mysql/mysql-server:5.7
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - '3306:3306'
     environment:
