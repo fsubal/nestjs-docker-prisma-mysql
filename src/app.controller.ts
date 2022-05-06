@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { ItemSerializer, ItemListSerializer } from './item/item.serializer';
 import { ItemService } from './item/item.service';
 import * as params from './utils/params';
 import { notFound, ok } from './utils/response';
@@ -11,7 +12,7 @@ export class AppController {
   async index() {
     const items = await this.items.findAll();
 
-    return ok(items);
+    return ok(new ItemListSerializer(items));
   }
 
   @Get('/api/items/:id')
@@ -23,6 +24,6 @@ export class AppController {
       return notFound(`Item (id: ${id}) not found`);
     }
 
-    return ok(item);
+    return ok(new ItemSerializer(item));
   }
 }

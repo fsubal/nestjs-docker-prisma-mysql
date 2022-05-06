@@ -1,12 +1,17 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
+export interface JsonSerializer<T> {
+  toJSON(): T;
+  getErrors(): string[];
+}
+
 export interface ResponseJson<T> {
   data: T;
   errors: string[];
 }
 
-export function ok<T>(data: T): ResponseJson<T> {
-  return { data, errors: [] };
+export function ok<T>(serializer: JsonSerializer<T>): ResponseJson<T> {
+  return { data: serializer.toJSON(), errors: serializer.getErrors() };
 }
 
 export function notFound(message = 'Record Not Found'): never {
