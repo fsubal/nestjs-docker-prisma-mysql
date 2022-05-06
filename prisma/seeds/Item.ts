@@ -4,7 +4,6 @@ const items: Prisma.ItemCreateInput[] = [
   {
     title: 'hoge',
     content: 'hello world!!',
-    updatedAt: new Date('2022-05-06T00:00:00'),
   },
 ];
 
