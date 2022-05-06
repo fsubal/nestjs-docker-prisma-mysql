@@ -37,6 +37,9 @@ $ yarn up
 
 # setup database ( sync database schema )
 $ yarn db:push
+
+# insert seed data
+$ yarn db:seed
 ```
 
 Currently HMR is not enabled, so the server will reload on every file change.
