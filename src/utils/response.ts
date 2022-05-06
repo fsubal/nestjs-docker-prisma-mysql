@@ -1,4 +1,5 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { ErrorEntity } from './api.entity';
 
 export interface JsonSerializer<T> {
   toJSON(): T;
@@ -15,15 +16,9 @@ export function ok<T>(serializer: JsonSerializer<T>): ResponseJson<T> {
 }
 
 export function notFound(message = 'Record Not Found'): never {
-  throw new NotFoundException({
-    data: null,
-    errors: [message],
-  });
+  throw new NotFoundException(new ErrorEntity([message]));
 }
 
 export function badRequest(message = 'Invalid Request'): never {
-  throw new BadRequestException({
-    data: null,
-    errors: [message],
-  });
+  throw new BadRequestException(new ErrorEntity([message]));
 }

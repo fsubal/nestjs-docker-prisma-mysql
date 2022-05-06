@@ -1,6 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ItemSerializer, ItemListSerializer } from './item/item.serializer';
+import { ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ItemEntity } from './item/item.entity';
+import { ItemListSerializer } from './item/item.serializer';
 import { ItemService } from './item/item.service';
+import { ErrorEntity } from './utils/api.entity';
 import * as params from './utils/params';
 import { notFound, ok } from './utils/response';
 
@@ -9,6 +12,7 @@ export class AppController {
   constructor(private readonly items: ItemService) {}
 
   @Get('/')
+  @ApiOkResponse({ description: 'On success', type: ItemListSerializer })
   async index() {
     const items = await this.items.findAll();
 
@@ -16,7 +20,9 @@ export class AppController {
   }
 
   @Get('/api/items/:id')
-  async show(@Param('id') idStr: string) {
+  @ApiOkResponse({ description: 'On success', type: ItemEntity })
+  @ApiNotFoundResponse({ description: 'Not found', type: ErrorEntity })
+  async show(@Param('id') idStr: string): Promise<ItemEntity> {
     const id = params.asInteger(idStr, '/:id must be numeric');
     const item = await this.items.findById(id);
 
@@ -24,6 +30,6 @@ export class AppController {
       return notFound(`Item (id: ${id}) not found`);
     }
 
-    return ok(new ItemSerializer(item));
+    return new ItemEntity(item, []);
   }
 }
