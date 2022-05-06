@@ -8,4 +8,10 @@ export class ItemService {
   findAll() {
     return this.prisma.item.findMany();
   }
+
+  findById(id: number) {
+    return this.prisma.item.findFirst({
+      where: { id },
+    });
+  }
 }

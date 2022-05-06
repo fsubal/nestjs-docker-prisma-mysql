@@ -17,7 +17,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return', async () => {
-      expect(await appController.getHello()).toHaveLength(1);
+      expect(await appController.index()).toHaveLength(1);
     });
   });
 });
