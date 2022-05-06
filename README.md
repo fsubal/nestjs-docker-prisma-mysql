@@ -26,16 +26,17 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Setup
 
 ```bash
+# install
 $ yarn
-```
 
-## Running the app
+# run containers
+$ yarn up
 
-```bash
-$ docker compose up -d --build
+# setup database ( sync database schema )
+$ yarn db:push
 ```
 
 Currently HMR is not enabled, so the server will reload on every file change.
@@ -45,7 +46,7 @@ Currently HMR is not enabled, so the server will reload on every file change.
 Log in to the `app` container and run
 
 ```bash
-$ yarn prisma migrate dev
+$ yarn db:migrate:dev
 ```
 
 ## Test
