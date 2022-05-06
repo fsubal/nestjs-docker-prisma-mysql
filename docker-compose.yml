@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  app:
+    container_name: app
+    build: .
+    tty: true
+    command: yarn start:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+
+  mysql:
+    image: mysql/mysql-server:5.7
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: develop
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - /var/lib/mysql
