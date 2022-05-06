@@ -10,6 +10,26 @@ export interface ResponseJson<T> {
   errors: string[];
 }
 
+export function arrayOf<T extends JsonSerializer<any>, Input>(
+  klass: new (input: Input) => T,
+) {
+  return class SerializeAsArray {
+    serializers: T[];
+
+    constructor(public objects: Input[]) {
+      this.serializers = this.objects.map((o) => new klass(o));
+    }
+
+    toJSON() {
+      return this.serializers.map((s) => s.toJSON());
+    }
+
+    getErrors() {
+      return this.serializers.flatMap((s) => s.getErrors());
+    }
+  };
+}
+
 export function ok<T>(serializer: JsonSerializer<T>): ResponseJson<T> {
   return { data: serializer.toJSON(), errors: serializer.getErrors() };
 }

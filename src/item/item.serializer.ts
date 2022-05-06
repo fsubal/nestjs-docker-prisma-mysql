@@ -1,4 +1,5 @@
 import { Item } from '@prisma/client';
+import { arrayOf } from 'src/utils/response';
 
 export class ItemSerializer {
   private errors = new Set<string>();
@@ -30,18 +31,4 @@ export class ItemSerializer {
   }
 }
 
-export class ItemListSerializer {
-  private serializers: ItemSerializer[];
-
-  constructor(private objects: Item[]) {
-    this.serializers = this.objects.map((o) => new ItemSerializer(o));
-  }
-
-  toJSON() {
-    return this.serializers.map((s) => s.toJSON());
-  }
-
-  getErrors() {
-    return this.serializers.flatMap((s) => s.getErrors());
-  }
-}
+export class ItemListSerializer extends arrayOf(ItemSerializer) {}
