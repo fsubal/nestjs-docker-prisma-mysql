@@ -1,17 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { ItemListSerializer, ItemSerializer } from './item.serializer';
 
 @Injectable()
 export class ItemService {
   constructor(private prisma: PrismaService) {}
 
-  findAll() {
-    return this.prisma.item.findMany();
+  async findAll() {
+    const items = await this.prisma.item.findMany();
+
+    return new ItemListSerializer(items);
   }
 
-  findById(id: number) {
-    return this.prisma.item.findFirst({
+  async findById(id: number) {
+    const item = await this.prisma.item.findFirst({
       where: { id },
     });
+
+    if (!item) {
+      return null;
+    }
+
+    return new ItemSerializer(item);
   }
 }
