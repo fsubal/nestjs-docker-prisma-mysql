@@ -1,4 +1,6 @@
-![Nest Logo](https://nestjs.com/img/logo-small.svg)
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
 [![Node.js Testing](https://github.com/fsubal/nestjs-docker-prisma-mysql/actions/workflows/test.yml/badge.svg)](https://github.com/fsubal/nestjs-docker-prisma-mysql/actions/workflows/test.yml)
 
