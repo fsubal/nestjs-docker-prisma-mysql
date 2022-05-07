@@ -1,9 +1,18 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  I18nExceptionFilter,
+  I18nNotFoundException,
+} from '@anchan828/nest-i18n-i18next';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  UseFilters,
+} from '@nestjs/common';
 import { ItemService } from '../../../services/item/item.service';
-import * as params from '../../../utils/params';
-import { notFound } from '../../../utils/response';
 
 @Controller('api/v1/items')
+@UseFilters(I18nExceptionFilter)
 export class ItemController {
   constructor(private readonly items: ItemService) {}
 
@@ -15,12 +24,14 @@ export class ItemController {
   }
 
   @Get(':id')
-  async show(@Param('id') idStr: string) {
-    const id = params.asInteger(idStr, '/:id must be numeric');
+  async show(@Param('id', ParseIntPipe) id: number) {
     const item = await this.items.findById(id);
 
     if (!item) {
-      return notFound(`Item (id: ${id}) not found`);
+      throw new I18nNotFoundException({
+        key: 'requests.not_found',
+        options: {},
+      });
     }
 
     return item;
