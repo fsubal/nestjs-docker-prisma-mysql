@@ -20,7 +20,7 @@ export class ItemController {
   async index() {
     const items = await this.items.findAll();
 
-    return items;
+    return items.toJSON();
   }
 
   @Get(':id')
@@ -34,6 +34,6 @@ export class ItemController {
       });
     }
 
-    return item;
+    return item.toJSON();
   }
 }
