@@ -1,12 +1,25 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { Locales } from './i18n';
+import { TOptions } from 'i18next';
+import type { I18nKey, I18nable } from '../decorators/i18n/i18n.decorator';
 
-export interface JsonSerializer<T> {
+type AnyJson =
+  | boolean
+  | number
+  | string
+  | null
+  | Jsonable[]
+  | {
+      [key: string]: Jsonable;
+    };
+
+type Jsonable = AnyJson | Date; // JSON itself does not allow Date, but NestJS does
+
+export interface JsonSerializer<T extends Jsonable> {
   toJSON(): T;
-  getErrors(locale: Locales): string[];
+  getErrors(): [I18nKey, TOptions][];
 }
 
-export interface ResponseJson<T> {
+export interface ResponseJson<T extends Jsonable> {
   data: T;
   errors: string[];
 }
@@ -25,35 +38,29 @@ export function arrayOf<T extends JsonSerializer<any>, Input>(
       return this.serializers.map((s) => s.toJSON());
     }
 
-    getErrors(locale: Locales) {
-      return this.serializers.flatMap((s) => s.getErrors(locale));
+    getErrors() {
+      return this.serializers.flatMap((s) => s.getErrors());
     }
   };
 }
 
-export function ok<T>(
+export function ok<T extends Jsonable>(
   serializer: JsonSerializer<T>,
-  locale: Locales,
+  i18n: I18nable,
 ): ResponseJson<T> {
-  return { data: serializer.toJSON(), errors: serializer.getErrors(locale) };
+  return { data: serializer.toJSON(), errors: i18n.ts(serializer.getErrors()) };
 }
 
-export function notFound(
-  _locale: Locales,
-  messageId = 'Record Not Found',
-): never {
+export function notFound(message: string): never {
   throw new NotFoundException({
     data: null,
-    errors: [messageId],
+    errors: [message],
   });
 }
 
-export function badRequest(
-  _locale: Locales,
-  messageId = 'Invalid Request',
-): never {
+export function badRequest(message: string): never {
   throw new BadRequestException({
     data: null,
-    errors: [messageId],
+    errors: [message],
   });
 }

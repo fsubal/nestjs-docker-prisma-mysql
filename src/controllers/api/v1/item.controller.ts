@@ -1,6 +1,6 @@
-import { Controller, Get, Param, Headers } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { I18n, I18nable } from 'src/decorators/i18n/i18n.decorator';
 import { ItemService } from '../../../services/item/item.service';
-import * as params from '../../../utils/params';
 import { notFound, ok } from '../../../utils/response';
 
 @Controller('api/v1/items')
@@ -8,28 +8,20 @@ export class ItemController {
   constructor(private readonly items: ItemService) {}
 
   @Get('/')
-  async index(@Headers('Accept-Language') accept: string) {
-    const locale = params.asLocale(accept);
-
+  async index(@I18n() i18n: I18nable) {
     const items = await this.items.findAll();
 
-    return ok(items, locale);
+    return ok(items, i18n);
   }
 
   @Get(':id')
-  async show(
-    @Param('id') idStr: string,
-    @Headers('Accept-Language') accept: string,
-  ) {
-    const locale = params.asLocale(accept);
-
-    const id = params.asInteger(idStr, locale, '/:id must be numeric');
+  async show(@Param('id', ParseIntPipe) id: number, @I18n() i18n: I18nable) {
     const item = await this.items.findById(id);
 
     if (!item) {
-      return notFound(locale, `Item (id: ${id}) not found`);
+      return notFound(i18n.t('request.not_found'));
     }
 
-    return ok(item, locale);
+    return ok(item, i18n);
   }
 }

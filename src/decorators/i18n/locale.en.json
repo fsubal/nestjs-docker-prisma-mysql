@@ -1,0 +1,9 @@
+{
+    "request": {
+        "not_found": "Record was not found",
+        "bad_request": "Request is invalid"
+    },
+    "item": {
+        "invalid_updated_at": "updatedAt must be after createdAt"
+    }
+}
