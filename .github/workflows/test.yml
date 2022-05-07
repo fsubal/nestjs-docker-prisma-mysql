@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Node.js Testing
 
 on:
   push:
@@ -19,12 +19,13 @@ jobs:
         with:
           node-version: 14.17.0
           cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn lint
+      - run: yarn typecheck
       - name: setup containers
         run: |
-          yarn
           yarn up
           docker exec app yarn db:apply
           docker exec app yarn db:seed
-      - run: yarn lint
-      - run: yarn typecheck
       - run: docker exec app yarn test
+      - run: docker exec app yarn test:e2e
