@@ -1,8 +1,9 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { Locales } from './i18n';
 
 export interface JsonSerializer<T> {
   toJSON(): T;
-  getErrors(): string[];
+  getErrors(locale: Locales): string[];
 }
 
 export interface ResponseJson<T> {
@@ -24,26 +25,35 @@ export function arrayOf<T extends JsonSerializer<any>, Input>(
       return this.serializers.map((s) => s.toJSON());
     }
 
-    getErrors() {
-      return this.serializers.flatMap((s) => s.getErrors());
+    getErrors(locale: Locales) {
+      return this.serializers.flatMap((s) => s.getErrors(locale));
     }
   };
 }
 
-export function ok<T>(serializer: JsonSerializer<T>): ResponseJson<T> {
-  return { data: serializer.toJSON(), errors: serializer.getErrors() };
+export function ok<T>(
+  serializer: JsonSerializer<T>,
+  locale: Locales,
+): ResponseJson<T> {
+  return { data: serializer.toJSON(), errors: serializer.getErrors(locale) };
 }
 
-export function notFound(message = 'Record Not Found'): never {
+export function notFound(
+  _locale: Locales,
+  messageId = 'Record Not Found',
+): never {
   throw new NotFoundException({
     data: null,
-    errors: [message],
+    errors: [messageId],
   });
 }
 
-export function badRequest(message = 'Invalid Request'): never {
+export function badRequest(
+  _locale: Locales,
+  messageId = 'Invalid Request',
+): never {
   throw new BadRequestException({
     data: null,
-    errors: [message],
+    errors: [messageId],
   });
 }

@@ -1,4 +1,5 @@
 import { Item } from '@prisma/client';
+import { Locales } from '../../../src/utils/i18n';
 import { arrayOf } from '../../../src/utils/response';
 
 export class ItemSerializer {
@@ -17,7 +18,7 @@ export class ItemSerializer {
     };
   }
 
-  getErrors(): string[] {
+  getErrors(_locale: Locales): string[] {
     return Array.from(this.errors);
   }
 
