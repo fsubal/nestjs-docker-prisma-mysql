@@ -27,4 +27,4 @@ jobs:
         docker exec -it app yarn db:seed
     - run: yarn lint
     - run: yarn typecheck
-    - run: yarn test
+    - run: docker exec -it app yarn test
