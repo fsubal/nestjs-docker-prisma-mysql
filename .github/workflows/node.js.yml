@@ -5,26 +5,26 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 14.17.0
-        cache: 'yarn'
-    - name: setup containers
-      run: |
-        yarn
-        yarn up
-        docker exec -it app yarn db:push
-        docker exec -it app yarn db:seed
-    - run: yarn lint
-    - run: yarn typecheck
-    - run: docker exec -it app yarn test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.0
+          cache: 'yarn'
+      - name: setup containers
+        run: |
+          yarn
+          yarn up
+          docker exec -it app yarn db:push
+          docker exec -it app yarn db:seed
+      - run: yarn lint
+      - run: yarn typecheck
+      - run: docker exec -it app yarn test
