@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { ItemListSerializer, ItemSerializer } from './item.serializer';
+import { ItemDto } from './item.dto';
 
 @Injectable()
 export class ItemService {
@@ -9,7 +9,7 @@ export class ItemService {
   async findAll() {
     const items = await this.prisma.item.findMany();
 
-    return new ItemListSerializer(items);
+    return items.map((item) => new ItemDto(item));
   }
 
   async findById(id: number) {
@@ -21,6 +21,6 @@ export class ItemService {
       return null;
     }
 
-    return new ItemSerializer(item);
+    return new ItemDto(item);
   }
 }

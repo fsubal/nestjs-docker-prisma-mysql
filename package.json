@@ -17,7 +17,7 @@
     "console": "ts-node -r ./bin/console.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "jest --clearCache",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
@@ -34,10 +34,12 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^5.2.1",
     "@prisma/client": "^3.13.0",
     "i18next": "^21.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
+    "swagger-ui-express": "^4.3.0",
     "zod": "^3.15.1"
   },
   "devDependencies": {

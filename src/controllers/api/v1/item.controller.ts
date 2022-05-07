@@ -9,6 +9,8 @@ import {
   ParseIntPipe,
   UseFilters,
 } from '@nestjs/common';
+import { ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ItemDto } from '../../../services/item/item.dto';
 import { ItemService } from '../../../services/item/item.service';
 
 @Controller('api/v1/items')
@@ -17,13 +19,16 @@ export class ItemController {
   constructor(private readonly items: ItemService) {}
 
   @Get('/')
+  @ApiOkResponse({ type: [ItemDto] })
   async index() {
     const items = await this.items.findAll();
 
-    return items.toJSON();
+    return items;
   }
 
   @Get(':id')
+  @ApiNotFoundResponse()
+  @ApiOkResponse({ type: ItemDto })
   async show(@Param('id', ParseIntPipe) id: number) {
     const item = await this.items.findById(id);
 
@@ -34,6 +39,6 @@ export class ItemController {
       });
     }
 
-    return item.toJSON();
+    return item;
   }
 }
