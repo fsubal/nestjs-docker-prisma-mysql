@@ -36,10 +36,10 @@ $ yarn
 $ yarn up
 
 # setup database ( sync database schema )
-$ yarn db:push
+$ docker exec -it app yarn db:push
 
 # insert seed data
-$ yarn db:seed
+$ docker exec -it app yarn db:seed
 ```
 
 Currently HMR is not enabled, so the server will reload on every file change.
@@ -49,7 +49,7 @@ Currently HMR is not enabled, so the server will reload on every file change.
 Log in to the `app` container and run
 
 ```bash
-$ yarn db:migrate:dev
+$ docker exec -it app yarn db:migrate:dev
 ```
 
 ## Test
