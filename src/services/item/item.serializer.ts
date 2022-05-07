@@ -1,9 +1,9 @@
 import { Item } from '@prisma/client';
-import { createErrorMap } from '../../utils/errors';
-import { arrayOf } from '../../utils/response';
+import { Locales } from '../../../src/utils/i18n';
+import { arrayOf } from '../../../src/utils/response';
 
 export class ItemSerializer {
-  private errors = createErrorMap();
+  private errors = new Set<string>();
 
   constructor(private object: Item) {
     this.#validateDate();
@@ -18,8 +18,8 @@ export class ItemSerializer {
     };
   }
 
-  getErrors() {
-    return this.errors.toArray();
+  getErrors(_locale: Locales): string[] {
+    return Array.from(this.errors);
   }
 
   #validateDate() {
@@ -28,7 +28,7 @@ export class ItemSerializer {
       return;
     }
 
-    this.errors.add('item.invalid_updated_at');
+    this.errors.add('updatedAt must not be before createdAt');
   }
 }
 

@@ -1,9 +1,0 @@
-{
-    "request": {
-        "not_found": "見つかりませんでした",
-        "bad_request": "不正なリクエストです"
-    },
-    "item": {
-        "invalid_updated_at": "更新日時は作成日時よりも未来でなければなりません"
-    }
-}

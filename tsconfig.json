@@ -6,7 +6,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
     "target": "esnext",
     "sourceMap": true,
     "outDir": "./dist",
