@@ -4,9 +4,10 @@ services:
     container_name: app
     build: .
     tty: true
-    command: yarn start:dev
+    command: yarn run-p start:dev db:studio
     ports:
       - '3000:3000'
+      - '5555:5555'
     volumes:
       - .:/app
     depends_on:

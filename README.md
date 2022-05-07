@@ -30,6 +30,12 @@ $ docker exec -it app yarn db:seed
 
 Currently HMR is not enabled, so the server will reload on every file change.
 
+## Use Prisma Studio
+
+You can view / edit DB tables using [Prisma Studio](https://www.prisma.io/studio).
+
+Once you run `yarn up`, you can open it in `http://localhost:5555`.
+
 ## Migration (Development)
 
 Log in to the `app` container and run
