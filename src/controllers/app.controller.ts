@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ItemService } from './services/item/item.service';
-import * as params from './utils/params';
-import { notFound, ok } from './utils/response';
+import { ItemService } from '../services/item/item.service';
+import * as params from '../utils/params';
+import { notFound, ok } from '../utils/response';
 
 @Controller()
 export class AppController {
