@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   app:
     container_name: app
@@ -6,7 +6,7 @@ services:
     tty: true
     command: yarn start:dev
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/app
     depends_on:
@@ -25,4 +25,4 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     volumes:
-      - /var/lib/mysql
+      - ./prisma/data:/var/lib/mysql
