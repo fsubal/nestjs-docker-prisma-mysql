@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ItemService } from './item/item.service';
+import { ItemService } from './services/item/item.service';
 import * as params from './utils/params';
 import { notFound, ok } from './utils/response';
 
