@@ -25,7 +25,7 @@ jobs:
       - name: setup containers
         run: |
           yarn up
-          docker exec app yarn db:apply
-          docker exec app yarn db:seed
-      - run: docker exec app yarn test
-      - run: docker exec app yarn test:e2e
+          docker exec app -T yarn db:apply
+          docker exec app -T yarn db:seed
+      - run: docker exec -T app yarn test
+      - run: docker exec -T app yarn test:e2e
