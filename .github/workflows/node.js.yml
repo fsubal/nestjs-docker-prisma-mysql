@@ -23,8 +23,8 @@ jobs:
         run: |
           yarn
           yarn up
-          docker exec -it app yarn db:push
-          docker exec -it app yarn db:seed
+          docker exec app yarn db:push
+          docker exec app yarn db:seed
       - run: yarn lint
       - run: yarn typecheck
-      - run: docker exec -it app yarn test
+      - run: docker exec app yarn test
