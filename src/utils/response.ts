@@ -2,11 +2,6 @@ export interface JsonSerializer<T> {
   toJSON(): T;
 }
 
-export interface ResponseJson<T> {
-  data: T;
-  errors: string[];
-}
-
 export function arrayOf<T extends JsonSerializer<any>, Input>(
   klass: new (input: Input) => T,
 ) {
