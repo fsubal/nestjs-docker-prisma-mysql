@@ -31,6 +31,8 @@ jobs:
           node-version: 14.17.0
           cache: 'yarn'
       - run: yarn install --immutable
+      - run: |
+          echo "DATABASE_URL=mysql://root:password@localhost/develop" > .env
       - name: prepare
         run: |
           yarn db:apply
