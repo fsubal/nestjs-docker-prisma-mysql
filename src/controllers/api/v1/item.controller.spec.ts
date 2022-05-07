@@ -17,7 +17,9 @@ describe('ItemController', () => {
 
   describe('index', () => {
     it('should return', async () => {
-      expect(await controller.index()).toHaveLength(1);
+      const response = await controller.index();
+
+      expect(response.data).toBeInstanceOf(Array);
     });
   });
 });
