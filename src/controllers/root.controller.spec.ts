@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
+import { RootController } from './root.controller';
 import { ItemService } from '../services/item/item.service';
 import { PrismaService } from '../services/prisma/prisma.service';
 
-describe('AppController', () => {
-  let appController: AppController;
+describe('RootController', () => {
+  let controller: RootController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
+      controllers: [RootController],
       providers: [ItemService, PrismaService],
     }).compile();
 
-    appController = app.get(AppController);
+    controller = app.get(RootController);
   });
 
   describe('root', () => {
     it('should return', async () => {
-      expect(await appController.index()).toHaveLength(1);
+      expect(await controller.index()).toEqual({ healthz: true });
     });
   });
 });
