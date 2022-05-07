@@ -1,18 +1,14 @@
-import { DEFAULT_LOCALE, LOCALES, Locales } from './i18n';
+import { DEFAULT_LOCALE, LOCALES, Locales } from '../i18n/utils';
 import { badRequest } from './response';
 
-export function asInteger(
-  value: unknown,
-  locale: Locales = DEFAULT_LOCALE,
-  message?: string,
-): number {
+export function asInteger(value: unknown, message?: string): number {
   if (!(typeof value === 'string')) {
-    return badRequest(locale, message);
+    return badRequest(message);
   }
 
   const parsed = parseInt(value);
   if (Number.isNaN(parsed)) {
-    return badRequest(locale, message);
+    return badRequest(message);
   }
 
   return parsed;

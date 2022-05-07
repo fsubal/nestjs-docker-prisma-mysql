@@ -1,0 +1,9 @@
+{
+    "requests": {
+        "not_found": "レコードが見つかりません",
+        "bad_request": "不正なリクエストです"
+    },
+    "items": {
+        "invalid_updated_at": "updatedAt は createdAt 以降でなければなりません"
+    }
+}

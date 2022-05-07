@@ -1,13 +1,10 @@
 import { Item } from '@prisma/client';
-import { Locales } from '../../../src/utils/i18n';
 import { arrayOf } from '../../../src/utils/response';
 
 export class ItemSerializer {
   private errors = new Set<string>();
 
-  constructor(private object: Item) {
-    this.#validateDate();
-  }
+  constructor(private object: Item) {}
 
   toJSON() {
     return {
@@ -16,19 +13,6 @@ export class ItemSerializer {
       updatedAt: this.object.updatedAt,
       createdAt: this.object.createdAt,
     };
-  }
-
-  getErrors(_locale: Locales): string[] {
-    return Array.from(this.errors);
-  }
-
-  #validateDate() {
-    const { updatedAt, createdAt } = this.object;
-    if (updatedAt >= createdAt) {
-      return;
-    }
-
-    this.errors.add('updatedAt must not be before createdAt');
   }
 }
 
