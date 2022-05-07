@@ -36,7 +36,7 @@ $ yarn
 $ yarn up
 
 # setup database ( sync database schema )
-$ docker exec -it app yarn db:push
+$ docker exec -it app yarn db:apply
 
 # insert seed data
 $ docker exec -it app yarn db:seed
