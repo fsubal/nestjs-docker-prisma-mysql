@@ -13,6 +13,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql
+        ports:
+          - '3306:3306'
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: develop
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -20,12 +31,10 @@ jobs:
           node-version: 14.17.0
           cache: 'yarn'
       - run: yarn install --immutable
-      - run: yarn lint
-      - run: yarn typecheck
-      - name: setup containers
+      - name: prepare
         run: |
           yarn up
-          docker exec app -T yarn db:apply
-          docker exec app -T yarn db:seed
-      - run: docker exec -T app yarn test
-      - run: docker exec -T app yarn test:e2e
+          yarn db:apply
+          yarn db:seed
+      - run: yarn test
+      - run: yarn test:e2e
