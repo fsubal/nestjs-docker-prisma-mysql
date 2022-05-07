@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ItemController } from './item.controller';
 import { ItemService } from '../../../services/item/item.service';
 import { PrismaService } from '../../../services/prisma/prisma.service';
-import { DEFAULT_LOCALE } from 'src/utils/i18n';
+import { DEFAULT_LOCALE } from '../../../utils/i18n';
 
 describe('ItemController', () => {
   let controller: ItemController;
