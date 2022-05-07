@@ -12,7 +12,7 @@ services:
     depends_on:
       - mysql
     env_file:
-      - .env
+      - ./prisma/.env
 
   mysql:
     image: mysql

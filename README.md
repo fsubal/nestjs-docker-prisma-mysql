@@ -15,6 +15,9 @@ Application template for [NestJS](https://github.com/nestjs/nest) + Docker + Pri
 # install
 $ yarn
 
+# Setup env file for database
+$ cp prisma/.env.example prisma/.env
+
 # run containers
 $ yarn up
 
