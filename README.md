@@ -44,6 +44,10 @@ Log in to the `app` container and run
 $ docker exec -it app yarn db:migrate:dev
 ```
 
+## Swagger
+
+Swagger UI is available on `http://localhost:3000/api`
+
 ## Test
 
 ```bash
