@@ -32,7 +32,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: |
-          echo "DATABASE_URL=mysql://root:password@localhost/develop" > ./.env
+          echo "DATABASE_URL=mysql://root:password@localhost/develop" > ./prisma/.env
       - name: prepare
         run: |
           yarn db:apply

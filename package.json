@@ -33,7 +33,6 @@
     "@anchan828/nest-i18n-i18next": "^0.3.37",
     "@aws-sdk/client-s3": "^3.86.0",
     "@nestjs/common": "^8.0.0",
-    "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.2.1",

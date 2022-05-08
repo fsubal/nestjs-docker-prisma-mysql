@@ -16,7 +16,7 @@ Application template for [NestJS](https://github.com/nestjs/nest) + Docker + Pri
 $ yarn
 
 # Setup env file for database
-$ cp .env.example .env
+$ cp prisma/.env.example prisma/.env
 
 # run containers
 $ yarn dev
@@ -47,10 +47,6 @@ $ docker exec -it app yarn db:migrate:dev
 ## Swagger
 
 Swagger UI is available on `http://localhost:3000/api`
-
-## Minio Console
-
-Minio Console is an admin console for uploaded file storage, available on `http://localhost:33023`
 
 ## Test
 
