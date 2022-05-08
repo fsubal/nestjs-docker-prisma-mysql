@@ -37,3 +37,7 @@ lerna-debug.log*
 # Database
 /prisma/data
 /prisma/.env
+
+# Yarn
+.yarn/*
+!.yarn/releases
