@@ -6,10 +6,10 @@ export class ItemDto {
   updatedAt: Date;
   createdAt: Date;
 
-  constructor(object: Item) {
-    this.id = object.id;
-    this.content = object.content;
-    this.updatedAt = object.updatedAt;
-    this.createdAt = object.createdAt;
+  constructor({ id, content, updatedAt, createdAt }: Item) {
+    this.id = id;
+    this.content = content;
+    this.updatedAt = updatedAt;
+    this.createdAt = createdAt;
   }
 }

@@ -12,6 +12,16 @@ model Item {
   title     String   @db.VarChar(255)
   content   String?
   published Boolean  @default(false)
+  account   Account  @relation(fields: [accountId], references: [id])
+  accountId Int
+}
+
+model Account {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  avatarUrl String?
+  Item      Item[]
 }
 
 datasource db {

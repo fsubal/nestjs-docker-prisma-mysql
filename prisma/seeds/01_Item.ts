@@ -4,6 +4,11 @@ const items: Prisma.ItemCreateInput[] = [
   {
     title: 'hoge',
     content: 'hello world!!',
+    account: {
+      create: {
+        avatarUrl: 'https://via.placeholder.com/100x100',
+      },
+    },
   },
 ];
 
