@@ -27,3 +27,20 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./prisma/data:/var/lib/mysql
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - 9090:9000
+      - 33023:33023
+    environment:
+      - MINIO_ROOT_USER=root
+      - MINIO_ROOT_PASSWORD=password
+    entrypoint: sh
+    command: -c "
+      mkdir -p /data/.minio.sys/buckets;
+      /opt/bin/minio server /data --console-address :33023;
+      "
+    volumes:
+      - ./minio:/data
