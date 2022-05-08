@@ -19,7 +19,7 @@ $ yarn
 $ cp prisma/.env.example prisma/.env
 
 # run containers
-$ yarn up
+$ yarn dev
 
 # setup database ( sync database schema )
 $ docker exec -it app yarn db:apply
@@ -34,7 +34,7 @@ Currently HMR is not enabled, so the server will reload on every file change.
 
 You can view / edit DB tables using [Prisma Studio](https://www.prisma.io/studio).
 
-Once you run `yarn up`, you can open it in `http://localhost:5555`.
+Once you run `yarn dev`, you can open it in `http://localhost:5555`.
 
 ## Migration (Development)
 
