@@ -3,6 +3,9 @@
 
 generator client {
   provider = "prisma-client-js"
+
+  // https://github.com/prisma/prisma-client-js/issues/616#issuecomment-616107821
+  binaryTargets = ["native", "darwin", "debian-openssl-1.1.x"]
 }
 
 model Item {
