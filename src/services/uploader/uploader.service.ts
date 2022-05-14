@@ -1,14 +1,14 @@
 import { PutObjectCommand, S3 } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
-import { ValidatedEnv } from '../../env';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UploaderService {
   private s3: S3;
 
-  constructor(private config: ValidatedEnv) {
-    const accessKeyId = this.config.get<string>('MINIO_ROOT_USER');
-    const secretAccessKey = this.config.get<string>('MINIO_ROOT_PASSWORD');
+  constructor(private config: ConfigService) {
+    const accessKeyId = this.config.get<string>('MINIO_ROOT_USER')!;
+    const secretAccessKey = this.config.get<string>('MINIO_ROOT_PASSWORD')!;
     const endpoint = this.config.get<string>('MINIO_ENDPOINT');
     const region = this.config.get<string>('MINIO_REGION');
 
