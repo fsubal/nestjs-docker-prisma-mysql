@@ -13,7 +13,7 @@ services:
     depends_on:
       - mysql
     env_file:
-      - ./prisma/.env
+      - ./.env
 
   mysql:
     image: mysql
@@ -34,9 +34,8 @@ services:
     ports:
       - 9090:9000
       - 33023:33023
-    environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=password
+    env_file:
+      - ./.env
     entrypoint: sh
     command: -c "
       mkdir -p /data/.minio.sys/buckets;

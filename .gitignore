@@ -34,9 +34,11 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Env
+*.env
+
 # Database
 /prisma/data
-/prisma/.env
 
 # Yarn
 .yarn/*
